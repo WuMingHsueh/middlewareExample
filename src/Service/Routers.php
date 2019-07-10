@@ -1,14 +1,17 @@
 <?php
+
 namespace BaseTemplatePHP\Service;
 
 use Klein\klein;
 use Klein\Request;
+use Pimple\Container;
 use BaseTemplatePHP\IEnvironment;
 
 class Routers
 {
 	private $klein;
 	private $kleinRequest;
+	private $container;
 
 	private $routers = [
 		// ["method" => "post", 'path' => "", "controller" => "", "responseMethod" => "", "canActivate" => "" ],
@@ -19,8 +22,9 @@ class Routers
 		// ["method" => "get", 'path' => "", "controller" => "", "responseMethod" => "", "viewLayout" => "", "viewRender" => ""],
 	];
 
-	public function __construct()
+	public function __construct(Container $container = null)
 	{
+		$this->container = $container ?? new Container();
 		$this->initSubDirectory(); // 若專案目錄是 "sub Directory" 則加入此函數設定$_SERVER['REQUEST_URI']
 
 		$this->klein = new Klein;
@@ -49,7 +53,7 @@ class Routers
 	{
 		foreach ($this->routers as $router) {
 			$this->klein->respond($router['method'], $router['path'], function ($request, $resopnse) use ($router) {
-				$controller = (isset($router["injectionService"])) ? new $router['controller'](new $router["injectionService"]) : new $router['controller'];
+				$controller = new $router['controller']($this->container);
 				try {
 					return $controller->{$router['responseMethod']}($request);
 				} catch (\Exception $e) {
@@ -60,11 +64,11 @@ class Routers
 		}
 	}
 
-	public function respondPage(Type $var = null)
+	public function respondPage()
 	{
 		foreach ($this->routersPage as $routerPage) {
 			$this->klein->respond($routerPage['method'], $routerPage['path'], function ($request, $resopnse, $service) use ($routerPage) {
-				$controller = new $routerPage['controller'];
+				$controller = new $routerPage['controller']($this->container);
 				$service = $controller->{$routerPage['responseMethod']}($request, $service);
 			});
 		}

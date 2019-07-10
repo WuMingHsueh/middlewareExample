@@ -1,7 +1,8 @@
 <?php
-namespace ShopProject\Service;
 
-use ShopProject\IEnvironment;
+namespace BaseTemplePHP\Service;
+
+use BaseTemplePHP\IEnvironment;
 use Illuminate\Database\Capsule\Manager as DB;
 
 class DbHelper
