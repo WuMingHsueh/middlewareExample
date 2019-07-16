@@ -1,16 +1,21 @@
 {
-    "name": "ri3567/base-temple-php",
-    "description": "my person use php project base template for begin new php project",
+    "name": "ri3567/middleware-test",
+    "description": "test my person middleware",
     "authors": [
         {
             "name": "Wu Ming-Hsueh",
             "email": "ri3567@gmail.com"
         }
     ],
-	"require": {},
+	"require": {
+        "klein/klein": "^2.1",
+        "pimple/pimple": "^3.2",
+        "illuminate/database": "^5.8",
+        "tedivm/stash": "^0.15.2"
+    },
 	"autoload": {
 		"psr-4": {
-			"BaseTemplatePHP\\" : "src/"
+			"Middleware\\" : "src/"
 		}
 	}
 }

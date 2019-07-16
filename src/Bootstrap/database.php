@@ -1,5 +1,5 @@
 <?php
 
-use BaseTemplePHP\Service\DbHelper;
+use Middleware\Service\DbHelper;
 
 $dbHelpler = new DbHelper;

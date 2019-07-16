@@ -1,8 +1,8 @@
 <?php
 
-namespace BaseTemplePHP\Service;
+namespace Middleware\Service;
 
-use BaseTemplePHP\IEnvironment;
+use Middleware\IEnvironment;
 use Illuminate\Database\Capsule\Manager as DB;
 
 class DbHelper

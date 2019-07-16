@@ -1,5 +1,5 @@
 <?php
 
-use BaseTemplatePHP\Service\Routers;
+use Middleware\Service\Routers;
 
 $routers = new Routers($container);

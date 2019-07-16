@@ -3,4 +3,4 @@
 use Pimple\Container;
 
 $container = new Container();
-// $container->register(new ShopProject\Service\Session\SessionService);
+$container->register(new Middleware\Service\Session\SessionService);
